@@ -4,7 +4,8 @@ echo -e "\n\t\t\t-------- install.sh started --------\n\t\t\t"
 
 # install dev environments
 echo -e "\tinstalling dev environments ..."
-  for dev in gcc g++ python3-dev libffi-dev openssl-dev
+  dependencies=(gcc g++ python3-dev libffi-dev openssl-dev)
+  for dev in ${dependencies[@]}
   do
   	apk add $dev 
   done
@@ -19,6 +20,15 @@ echo -e "\tinstalling packages ..."
    	echo -e "\t----------" $line "installed. ----------" 
   done
 echo -e "\n\t\t\t-------- final check --------\n\t\t\t"
+
+# uninstall dev environments
+echo -e "\tuninstalling dev environments ..."
+  dependencies=(gcc g++ python3-dev libffi-dev openssl-dev)
+  for dev in ${dependencies[@]}
+  do
+  	apk del $dev 
+  done
+echo -e "\tdev environments uninstalled"
 
 # finnally check
 
