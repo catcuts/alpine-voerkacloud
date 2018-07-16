@@ -7,8 +7,9 @@ VC_DATA=
 VC_HTTP_PORT=8000
 VC_MYSQL=
 VC_INIT=
+VC_MODE=d
 
-while getopts "c:i:w:d:p:m:n:" arg  # 选项后面的冒号表示该选项需要参数
+while getopts "c:i:w:d:p:m:n:u" arg  # 选项后面的冒号表示该选项需要参数
 do
     case $arg in
         c)
@@ -31,6 +32,9 @@ do
             ;;
         n)
             VC_INIT=$OPTARG  # 初始化指令
+            ;;
+        u)
+            VC_MODE=it  # 初始化指令
             ;;
     esac
 done
@@ -55,4 +59,4 @@ docker run --name $VC_CTNER \
 -e VC_PASSWORD=raspberry \
 -e VC_ROOT_PASSWORD=root \
 -p $VC_HTTP_PORT:8000 \
--d $VC_IMG $VC_INIT
+-$VC_MODE $VC_IMG $VC_INIT
